@@ -14,7 +14,6 @@ Used with so far tested and knows works-
 - .py
 - .rb
 - .php
-- .swift
 - .ts
 - .sh
 - .kt
