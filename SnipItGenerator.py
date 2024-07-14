@@ -29,6 +29,8 @@ def clean_filename_extension(filename, extension):
     for char in invalid_chars:
         filename = filename.replace(char, '')
         extension = extension.replace(char, '')
+    filename = filename.split(' ')[0]  # Discard anything after the first space
+    extension = extension.split(' ')[0]  # Discard anything after the first space
     return filename.strip(), extension.strip()
 
 def parse_filename_extension(line):
@@ -37,11 +39,11 @@ def parse_filename_extension(line):
     logging.debug(f"Reversed line: {reversed_line}")
     
     if '*/' in reversed_line:
-        parts = re.split(r'\s+|/|\\', reversed_line, 3)
+        parts = re.split(r'\s+|/|\\', reversed_line, 4)
         logging.debug(f"Parsed parts with '*/': {parts}")
-        if len(parts) > 3:
+        if len(parts) > 4:
             filename_part = parts[3][::-1]
-            extension_part = parts[2][::-1]
+            extension_part = parts[2][::-1] + '.' + parts[1][::-1]
         else:
             logging.debug("Filename or extension not properly extracted for '*/' case.")
             return None, None
@@ -106,6 +108,9 @@ def on_clipboard_change():
                 directory = get_directory_from_mouse_cursor()
                 if not directory or directory.lower() == 'c:\\windows':
                     directory = os.path.join(os.path.expanduser("~"), "Desktop")
+                # Remove any stray spaces in filename and extension
+                filename = filename.strip()
+                extension = extension.strip()
                 file_path = os.path.join(directory, f"{filename}.{extension}")
                 logging.info(f"Creating file with name: {file_path}")
                 with open(file_path, 'w') as f:
