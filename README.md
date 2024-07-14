@@ -4,3 +4,23 @@ Just a tool we made to help us quickly copy generated templates into a workspace
 More about Human Touch Labs here: https://humantouchlabs.com
 
 Human Touch Labs reserves ownership but the tool is avalible to use for those that want to!
+
+Used with so far tested and knows works-
+- .js
+- .json
+- .h
+- .cpp
+- .css
+- .py
+- .rb
+- .php
+- .swift
+- .ts
+- .sh
+- .kt
+- .pl
+- .go
+
+- Needs Repair:
+- .html
+- .xml
